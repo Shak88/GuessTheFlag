@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+struct FlagImage : View {
+    var name : String
+    var body: some View {
+        Image(name)
+            .renderingMode(.original)
+            .clipShape(Capsule())
+            .shadow(radius: 5)
+    }
+}
+
 struct ContentView: View {
     
     @State private var showingScore = false
@@ -21,7 +31,7 @@ struct ContentView: View {
     @State private var flagSelected = ""
     @State private var shouldRestart = false
     @State private var roundsCount = 0
-    
+     
     var body: some View {
         ZStack {
             RadialGradient(stops: [
@@ -46,13 +56,12 @@ struct ContentView: View {
                     
                     ForEach(0..<3 ) { number in
                         Button {
+                            //flagTapped is a method defined below
                             flagTapped(number)
                         } label: {
-                            Image(countries[number])
-                                .renderingMode(.original)
-                                .clipShape(Capsule())
-                                .shadow(radius: 5)
-                        }
+                            //this is new View created at the top of th
+                            FlagImage(name: countries[number])
+                                                        }
                         
                     }
                 }
